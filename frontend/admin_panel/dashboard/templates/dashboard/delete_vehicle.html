@@ -1,0 +1,35 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Delete Vehicle{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Delete Vehicle</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h5>Are you sure you want to delete this vehicle?</h5>
+                        <p>Vehicle Details:</p>
+                        <ul>
+                            <li>Make & Model: {{ vehicle.make_model }}</li>
+                            <li>Registration Number: {{ vehicle.registration_number }}</li>
+                            <li>Owner: {{ vehicle.owner.username }}</li>
+                            <li>Year: {{ vehicle.year }}</li>
+                        </ul>
+                        <p class="mb-0"><strong>Warning:</strong> This action cannot be undone.</p>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete Vehicle</button>
+                        <a href="{% url 'dashboard:vehicles' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

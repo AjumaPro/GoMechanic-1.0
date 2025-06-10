@@ -1,0 +1,37 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Delete Appointment{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Delete Appointment</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <h5>Are you sure you want to delete this appointment?</h5>
+                        <p>Appointment Details:</p>
+                        <ul>
+                            <li>Customer: {{ appointment.customer.username }}</li>
+                            <li>Vehicle: {{ appointment.vehicle.make_model }} ({{ appointment.vehicle.registration_number }})</li>
+                            <li>Service: {{ appointment.service.name }}</li>
+                            <li>Date: {{ appointment.date }}</li>
+                            <li>Time: {{ appointment.time }}</li>
+                            <li>Status: {{ appointment.status }}</li>
+                        </ul>
+                        <p class="mb-0"><strong>Warning:</strong> This action cannot be undone.</p>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete Appointment</button>
+                        <a href="{% url 'dashboard:appointments' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
